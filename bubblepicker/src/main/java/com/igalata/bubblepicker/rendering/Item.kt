@@ -76,7 +76,7 @@ data class Item(val pickerItem: PickerItem, val circleBody: CircleBody) {
 
         if (isSelected) drawImage(canvas)
         drawBackground(canvas, isSelected)
-        drawIcon(canvas)
+        drawIcon(canvas, isSelected)
         drawText(canvas, isSelected)
 
         return bitmap
@@ -85,14 +85,7 @@ data class Item(val pickerItem: PickerItem, val circleBody: CircleBody) {
     private fun drawBackground(canvas: Canvas, isSelected: Boolean) {
         val bgPaint = Paint()
         bgPaint.style = Paint.Style.FILL
-        pickerItem.color?.let {
-            if (isSelected) {
-                bgPaint.color = pickerItem.selectedColor!!
-            } else {
-                bgPaint.color = pickerItem.color!!
-            }
-
-        }
+        pickerItem.color?.let { bgPaint.color = if (isSelected) pickerItem.selectedColor!! else pickerItem.color!! }
         pickerItem.gradient?.let { bgPaint.shader = gradient }
         if (isSelected) bgPaint.alpha = (pickerItem.overlayAlpha * 255).toInt()
         canvas.drawRect(0f, 0f, bitmapSize, bitmapSize, bgPaint)
@@ -102,12 +95,7 @@ data class Item(val pickerItem: PickerItem, val circleBody: CircleBody) {
         if (pickerItem.title == null || pickerItem.textColor == null) return
 
         val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
-            if (isSelected) {
-                color = pickerItem.selectedTextColor!!
-            } else {
-                color = pickerItem.textColor!!
-            }
-
+            color = if (isSelected) pickerItem.selectedTextColor!! else pickerItem.textColor!!
             textSize = pickerItem.textSize
             typeface = pickerItem.typeface
         }
@@ -137,8 +125,9 @@ data class Item(val pickerItem: PickerItem, val circleBody: CircleBody) {
                 Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, false)
     }
 
-    private fun drawIcon(canvas: Canvas) {
-        pickerItem.icon?.let {
+    private fun drawIcon(canvas: Canvas, isSelected : Boolean = false) {
+        val icon = if (isSelected) pickerItem.selectedIcon else pickerItem.icon
+        icon?.let {
             val width = it.intrinsicWidth
             val height = it.intrinsicHeight
 

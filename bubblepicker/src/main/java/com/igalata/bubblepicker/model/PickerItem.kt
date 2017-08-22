@@ -9,6 +9,7 @@ import android.support.annotation.ColorInt
  */
 data class PickerItem @JvmOverloads constructor(var title: String? = null,
                                                 var icon: Drawable? = null,
+                                                var selectedIcon : Drawable? = null,
                                                 var iconOnTop: Boolean = true,
                                                 @ColorInt var color: Int? = null,
                                                 @ColorInt var selectedColor: Int? = null,
