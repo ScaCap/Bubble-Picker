@@ -109,10 +109,11 @@ data class Item(val pickerItem: PickerItem, val circleBody: CircleBody) {
             textLayout = placeText(paint)
         }
 
-        if (pickerItem.icon == null) {
+        val icon = if (isSelected) pickerItem.selectedIcon else pickerItem.icon
+        if (icon == null) {
             canvas.translate((bitmapSize - textLayout.width) / 2f, (bitmapSize - textLayout.height) / 2f)
         } else if (pickerItem.iconOnTop) {
-            canvas.translate((bitmapSize - textLayout.width) / 2f, bitmapSize / 2f)
+            canvas.translate((bitmapSize - textLayout.width) / 2f, bitmapSize * 0.6f)
         } else {
             canvas.translate((bitmapSize - textLayout.width) / 2f, bitmapSize / 2 - textLayout.height)
         }
