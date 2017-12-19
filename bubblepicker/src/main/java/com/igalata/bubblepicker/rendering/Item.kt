@@ -123,6 +123,9 @@ data class Item(val context: Context, val pickerItem: PickerItem, val circleBody
         // We set maxLines to two and then go through the measure, layout pass again.
         val currTextSize = viewText.textSize / context.resources.displayMetrics.density
         if (currTextSize <= 8) {
+            pickerItem.title?.let {
+                viewText.text = breakString(it)
+            }
             viewText.maxLines = 2
             measure()
             layout()
@@ -166,6 +169,14 @@ data class Item(val context: Context, val pickerItem: PickerItem, val circleBody
         Matrix.setIdentityM(this, 0)
         Matrix.translateM(this, 0, currentPosition.x * scaleX - initialPosition.x,
                 currentPosition.y * scaleY - initialPosition.y, 0f)
+    }
+
+    private fun breakString(target: String): String {
+        // TextView should break on a space automatically.
+        if (target.contains(' ')) return target
+
+        val m = target.length / 2
+        return "${target.substring(0, m)}-\n${target.substring(m)}"
     }
 
 }
