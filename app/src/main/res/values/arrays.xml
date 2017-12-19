@@ -18,6 +18,7 @@
         <item>Haiti</item>
         <item>Panama</item>
         <item>Paraguay</item>
+        <item>ReallyLongCountryName</item>
     </string-array>
 
     <integer-array name="images">
@@ -36,6 +37,7 @@
         <item>@drawable/el_salvador</item>
         <item>@drawable/haiti</item>
         <item>@drawable/panama</item>
+        <item>@drawable/paraguay</item>
         <item>@drawable/paraguay</item>
     </integer-array>
 
