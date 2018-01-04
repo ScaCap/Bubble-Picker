@@ -66,7 +66,7 @@ data class Item(val context: Context, val pickerItem: PickerItem, val circleBody
             weight = 1f
         })
         setImageDrawable(pickerItem.icon)
-        setScaleType(ImageView.ScaleType.CENTER)
+        setScaleType(ImageView.ScaleType.FIT_CENTER)
     }
 
     private val viewText: AppCompatTextView = AppCompatTextView(context).apply {
@@ -124,7 +124,7 @@ data class Item(val context: Context, val pickerItem: PickerItem, val circleBody
             pickerItem.titleBroken?.let {
                 viewText.text = it
             }
-            viewText.maxLines = 2
+            viewText.maxLines = pickerItem.maxTextLines
             autoTextSize(viewText, min = pickerItem.minTextSize)
             measure()
             layout()

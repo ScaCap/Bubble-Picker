@@ -17,4 +17,5 @@ data class PickerItem @JvmOverloads constructor(var title: String? = null,
                                                 var isSelected: Boolean = false,
                                                 var minTextSize: Int = 8,
                                                 var maxTextSize: Int = 12,
-                                                var textSizeUnit: Int = TypedValue.COMPLEX_UNIT_SP)
+                                                var textSizeUnit: Int = TypedValue.COMPLEX_UNIT_SP,
+                                                var maxTextLines: Int = 2)
