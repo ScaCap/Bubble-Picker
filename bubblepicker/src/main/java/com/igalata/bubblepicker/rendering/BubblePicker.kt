@@ -85,7 +85,7 @@ class BubblePicker : GLSurfaceView {
 
     private fun isClick(event: MotionEvent) = Math.abs(event.x - startX) < 20 && Math.abs(event.y - startY) < 20
 
-    private fun isTooFast() = System.currentTimeMillis() - previousUpTime < 250
+    private fun isTooFast() = System.currentTimeMillis() - previousUpTime <= 32
 
     private fun retrieveAttributes(attrs: AttributeSet) {
         val array = context.obtainStyledAttributes(attrs, R.styleable.BubblePicker)
