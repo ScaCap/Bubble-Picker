@@ -34,7 +34,7 @@ class PickerRenderer(val glView: View) : GLSurfaceView.Renderer {
             Engine.radius = value
         }
     var listener: BubblePickerListener? = null
-    lateinit var items: ArrayList<PickerItem>
+    var items: ArrayList<PickerItem> = ArrayList()
 
     private var programId = 0
     private var verticesBuffer: FloatBuffer? = null
