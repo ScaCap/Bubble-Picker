@@ -10,7 +10,7 @@ repositories {
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId "com.igalata.bubblepickerdemo"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -18,12 +18,14 @@ android {
         versionCode 4
         versionName "0.1.1"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
