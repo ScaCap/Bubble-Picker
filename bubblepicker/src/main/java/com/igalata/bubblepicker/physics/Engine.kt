@@ -17,10 +17,15 @@ object Engine : ContactListener {
     val selectedBodies: List<CircleBody>
         get() = bodies.filter { it.increased || it.toBeIncreased || it.isIncreasing }
     var maxSelectedCount: Int? = null
+
+    /**
+     * Represents what percentage of bigger screen dimension each bubble takes.
+     * Values 0..100 represent 15..35% of dimension
+     */
     var radius = 50
         set(value) {
             field = value
-            bubbleRadius = interpolate(0.1f, 0.25f, value / 100f)
+            bubbleRadius = interpolate(0.15f, 0.35f, value / 100f)
         }
     private var bubbleRadius = 0.15f
 
@@ -66,7 +71,7 @@ object Engine : ContactListener {
             val y = Random().nextFloat() - 0.5f
             val vx = (if (Random().nextBoolean()) -0.01f else 0.01f) * Random().nextFloat() / scaleY
             val vy = (if (Random().nextBoolean()) -0.01f else 0.01f) * Random().nextFloat() / scaleY
-            bodies.add(CircleBody(world, Vec2(x, y), bubbleRadius * scaleX, (bubbleRadius * scaleX) * 1.1f, density, Vec2(vx, vy)))
+            bodies.add(CircleBody(world, Vec2(x, y), bubbleRadius, bubbleRadius * 1.1f, density, Vec2(vx, vy)))
         }
         this.scaleX = scaleX
         this.scaleY = scaleY
