@@ -111,7 +111,7 @@ data class Item(val context: Context, val pickerItem: PickerItem, val circleBody
 
         viewText.setMaxLines(1)
         viewText.setTextColor(if (isSelected) pickerItem.selectedTextColor!! else pickerItem.textColor!!)
-        viewIcon.setVisibility(if (isSelected) View.VISIBLE else View.GONE)
+        viewIcon.setVisibility(if (isSelected && pickerItem.icon != null) View.VISIBLE else View.GONE)
 
         measure()
         layout()
