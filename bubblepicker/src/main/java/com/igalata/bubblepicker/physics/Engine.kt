@@ -8,6 +8,8 @@ import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics.World
 import org.jbox2d.dynamics.contacts.Contact
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Created by irinagalata on 1/26/17.
@@ -19,7 +21,7 @@ object Engine : ContactListener {
     var maxSelectedCount: Int? = null
 
     /**
-     * Represents what percentage of bigger screen dimension each bubble takes.
+     * Represents what percentage of smaller screen dimension each bubble takes.
      * Values 0..100 represent 15..35% of dimension
      */
     var radius = 50
@@ -66,12 +68,13 @@ object Engine : ContactListener {
 
     fun build(bodiesCount: Int, scaleX: Float, scaleY: Float): List<CircleBody> {
         val density = interpolate(0.8f, 0.2f, radius / 100f)
+        val scaleRatio = min(scaleX, scaleY) / max(scaleX, scaleY)
         for (i in 0..bodiesCount - 1) {
             val x = Random().nextFloat() - 0.5f
             val y = Random().nextFloat() - 0.5f
             val vx = (if (Random().nextBoolean()) -0.01f else 0.01f) * Random().nextFloat() / scaleY
             val vy = (if (Random().nextBoolean()) -0.01f else 0.01f) * Random().nextFloat() / scaleY
-            bodies.add(CircleBody(world, Vec2(x, y), bubbleRadius, bubbleRadius * 1.1f, density, Vec2(vx, vy)))
+            bodies.add(CircleBody(world, Vec2(x, y), bubbleRadius * scaleRatio, (bubbleRadius * scaleRatio) * 1.1f, density, Vec2(vx, vy)))
         }
         this.scaleX = scaleX
         this.scaleY = scaleY
